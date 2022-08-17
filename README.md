@@ -4,9 +4,9 @@ Seresco Maps Utils Android
 A powerful Google Maps Utils library for Android
 
 <p float="left">
-  <img src="art/img_manual_tracking.png" width="200" height="450">
-  <img src="Art/img_automatic_tracking.png" width="200" height="450">
-  <img src="Art/img_change_color.png" width="200" height="450">
+  <img src="art/img_manual_tracking.jpg" width="200" height="450">
+  <img src="Art/img_automatic_tracking.jpg" width="200" height="450">
+  <img src="Art/img_change_color.jpg" width="200" height="450">
 </p>
 
 Download
