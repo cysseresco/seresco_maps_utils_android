@@ -4,7 +4,7 @@ Weather Prediction
 Allow users to get the current weather prediction of the day.
 
 <p float="left">
-  <img src="../art/img_weather_prediction.jpg" width="200" height="450">
+  <img src="../art/img_weather_prediction.jpg" width="200" height="420">
 </p>
 
 How to use
