@@ -1,7 +1,14 @@
 Seresco Maps Utils Android
 =======
 
-A powerful Google Maps Utils library for Android
+## Description
+
+A maps utils library for Android using Google Maps Api
+
+- **Tracking**
+- **KML**
+- **Cluster**
+- **Markers**
 
 <p float="left">
   <img src="art/img_manual_tracking.jpg" width="200" height="450">
@@ -9,14 +16,38 @@ A powerful Google Maps Utils library for Android
   <img src="art/img_change_color.jpg" width="200" height="450">
 </p>
 
-Download
+Usage
 --------
 
-Download the latest AAR from [Maven Central][2] or grab via Gradle:
-```jitpack
-implementation 'com.seresco.maps.utils'
+e.g. Displaying Tracking Panel
+
+```kotlin
+import seresco.maps.utils.lib.utils.tracking.TrackingUtils
+
+private val trackingUtils = TrackingUtils(this, this)
+
+func openTrackingPanel() {
+    trackingUtils.openTrackingPanel(supportFragmentManager)
+}
+
+func showTrackedRoute() {
+    trackingUtils.showSavedCoordinates(supportFragmentManager, googleMap)
+}
 ```
 
-Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
-
-This lib requires at minimum Java 8 and API 21.
+Installation
+--------
+Add in the settings.gradle at the end of repositories:
+```groovy
+repositories {
+	maven { url 'https://jitpack.io' }
+}
+```
+And add the dependencies
+```groovy
+dependencies {
+    // Utilities for Maps SDK for Android (requires Google Play Services) 
+    implementation 'com.google.maps.android:android-maps-utils:2.4.0'
+    implementation 'com.github.cysseresco:seresco_maps_utils_android:1.0'
+}
+```
