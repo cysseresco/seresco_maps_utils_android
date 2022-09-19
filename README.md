@@ -26,11 +26,11 @@ import seresco.maps.utils.lib.utils.tracking.TrackingUtils
 
 private val trackingUtils = TrackingUtils(this, this)
 
-func openTrackingPanel() {
+fun openTrackingPanel() {
     trackingUtils.openTrackingPanel(supportFragmentManager)
 }
 
-func showTrackedRoute() {
+fun showTrackedRoute() {
     trackingUtils.showSavedCoordinates(supportFragmentManager, googleMap)
 }
 ```
