@@ -1,29 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_below="@+id/map"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment
-        android:id="@+id/map"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/ic_settings" />
-
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:layout_centerVertical="true">
+        <Button
+            android:id="@+id/b_tracking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tracking Utils"
+            android:textColor="@color/black"
+            android:background="@drawable/bg_round_border"
+            app:backgroundTint="@color/purple_500"
+            android:textAllCaps="false"
+            android:layout_marginBottom="30dp"/>
+        <Button
+            android:id="@+id/b_kml"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="KML Utils"
+            android:textColor="@color/black"
+            android:background="@drawable/bg_round_border"
+            app:backgroundTint="@color/purple_500"
+            android:textAllCaps="false"
+            android:layout_marginBottom="30dp"/>
+        <Button
+            android:id="@+id/b_cluster"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cluster/Markers Utils"
+            android:textColor="@color/black"
+            android:background="@drawable/bg_round_border"
+            app:backgroundTint="@color/purple_500"
+            android:textAllCaps="false"/>
+    </LinearLayout>
 </RelativeLayout>

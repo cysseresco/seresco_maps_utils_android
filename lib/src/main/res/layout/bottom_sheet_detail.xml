@@ -13,14 +13,12 @@
         android:layout_marginBottom="10dp"/>
 
    <TextView
-       android:id="@+id/tvName"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:text="Building 41"
+       android:text="Configurar KML"
        android:textSize="16dp"
        android:textColor="@color/black"
        android:layout_gravity="center"
-       android:enabled="false"
        android:layout_marginBottom="20dp"/>
 
     <LinearLayout

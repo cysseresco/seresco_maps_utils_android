@@ -1,15 +1,23 @@
 package seresco.maps.utils.lib.utils.kml
 
 import android.content.Context
+import android.graphics.Color
+import android.util.Log
+import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
+import androidx.fragment.app.FragmentManager
 import com.google.android.gms.maps.GoogleMap
 import com.google.maps.android.data.geojson.GeoJsonLayer
 import com.google.maps.android.data.geojson.GeoJsonLineStringStyle
 import com.google.maps.android.data.geojson.GeoJsonPolygonStyle
 import com.google.maps.android.data.kml.KmlLayer
 import org.json.JSONObject
-import java.util.regex.Matcher
-import java.util.regex.Pattern
+import seresco.maps.utils.lib.R
+import seresco.maps.utils.lib.ui.DetailBottomSheet
+import seresco.maps.utils.lib.ui.KmlSettingType
+import kotlin.math.roundToInt
+
 
 /**
  * Grupo de funciones relacionado con *KML*.
@@ -22,67 +30,106 @@ import java.util.regex.Pattern
  * @param fillColor color del bloque
  * @param zIndex grosor del borde
  */
-class KMLUtils {
+class KMLUtils(context: Context, supportFragmentManager: FragmentManager, googleMap: GoogleMap): DetailBottomSheet.DetailItemClicked {
+
+    private val mContext = context
+    private val mSupportFragmentManager = supportFragmentManager
+    private val mGoogleMap = googleMap
+
+    private lateinit var currentKmlStyle: KmlPreferenceStyle
 
     fun retrieveKml(map: GoogleMap, kmlRaw: String, context: Context): KmlLayer {
         return KmlLayer(map, kmlRaw.byteInputStream(), context)
     }
 
-    fun retrieveKml(map: GoogleMap, resource: Int, context: Context, strokeColor: Int, fillColor: Int, zIndex: Float): GeoJsonLayer {
-        val layer = GeoJsonLayer(map, resource, context)
+    fun retrieveKml(kmlStyle: KmlPreferenceStyle): GeoJsonLayer {
+        currentKmlStyle = kmlStyle
+        val layer = GeoJsonLayer(mGoogleMap, kmlStyle.resource, mContext)
         val geoPolygonStyle: GeoJsonPolygonStyle = layer.defaultPolygonStyle
-        geoPolygonStyle.strokeColor = ContextCompat.getColor(context, strokeColor)
-        geoPolygonStyle.fillColor = ContextCompat.getColor(context, fillColor)
-        geoPolygonStyle.zIndex = zIndex
-        geoPolygonStyle.isClickable = true;
+        geoPolygonStyle.strokeColor = ContextCompat.getColor(mContext, kmlStyle.strokeColor)
+        geoPolygonStyle.fillColor = ContextCompat.getColor(mContext, kmlStyle.fillColor)
+        geoPolygonStyle.zIndex = kmlStyle.borderWidth
+        geoPolygonStyle.isClickable = true
+        layer.setOnFeatureClickListener {
+            val detailSheet = DetailBottomSheet.newInstance(true, this)
+            detailSheet.show(mSupportFragmentManager, DetailBottomSheet.TAG)
+        }
         return layer
     }
 
-    fun retrieveKml(map: GoogleMap, coordinates: MutableList<MutableList<Double>>, context: Context, strokeColor: Int, fillColor: Int, zIndex: Float): GeoJsonLayer {
-        val resource = "{ \"type\": \"FeatureCollection\", \"features\": [ {  \"type\": \"Feature\", \"properties\": {}, \"geometry\": {  \"type\": \"LineString\",  \"coordinates\": $coordinates } } ] }"
-        val geoJsonData =  JSONObject(resource)
-        val layer = GeoJsonLayer(map, geoJsonData)
+    private fun retrieveKml(kmlStyle: KmlPreferenceStyle, alpha: Float): GeoJsonLayer {
+        mGoogleMap.clear()
+        currentKmlStyle = kmlStyle
+        val layer = GeoJsonLayer(mGoogleMap, kmlStyle.resource, mContext)
         val geoPolygonStyle: GeoJsonPolygonStyle = layer.defaultPolygonStyle
-        geoPolygonStyle.strokeColor = ContextCompat.getColor(context, strokeColor)
-        geoPolygonStyle.fillColor = ContextCompat.getColor(context, fillColor)
-        geoPolygonStyle.zIndex = zIndex
-        geoPolygonStyle.isClickable = true;
+        geoPolygonStyle.strokeColor = ContextCompat.getColor(mContext, kmlStyle.strokeColor)
+        val colorWithAlpha = adjustAlpha(ContextCompat.getColor(mContext, kmlStyle.fillColor), alpha)
+        geoPolygonStyle.fillColor = colorWithAlpha
+        geoPolygonStyle.zIndex = kmlStyle.borderWidth
+        geoPolygonStyle.isClickable = true
+        layer.setOnFeatureClickListener {
+            val detailSheet = DetailBottomSheet.newInstance(true, this)
+            detailSheet.show(mSupportFragmentManager, DetailBottomSheet.TAG)
+        }
         return layer
     }
 
-    fun retrieveLinesKml(map: GoogleMap, coordinates: MutableList<MutableList<Double>>, context: Context, strokeColor: Int, zIndex: Float): GeoJsonLayer {
+    @ColorInt
+    fun adjustAlpha(@ColorInt color: Int, factor: Float): Int {
+        val alpha = (Color.alpha(color) * factor).roundToInt()
+        val red: Int = Color.red(color)
+        val green: Int = Color.green(color)
+        val blue: Int = Color.blue(color)
+        return Color.argb(alpha, red, green, blue)
+    }
+
+    fun retrieveLinesKml(coordinates: MutableList<MutableList<Double>>, strokeColor: Int, zIndex: Float): GeoJsonLayer {
         val resource = "{ \"type\": \"FeatureCollection\", \"features\": [ {  \"type\": \"Feature\", \"properties\": {}, \"geometry\": {  \"type\": \"LineString\",  \"coordinates\": $coordinates } } ] }"
         val geoJsonData =  JSONObject(resource)
-        val layer = GeoJsonLayer(map, geoJsonData)
+        val layer = GeoJsonLayer(mGoogleMap, geoJsonData)
         val geoLinesStyle: GeoJsonLineStringStyle = layer.defaultLineStringStyle
-        geoLinesStyle.color = ContextCompat.getColor(context, strokeColor)
+        geoLinesStyle.color = ContextCompat.getColor(mContext, strokeColor)
         geoLinesStyle.zIndex = zIndex
         geoLinesStyle.isClickable = true;
         return layer
     }
 
-    fun processKml(kmlRaw: String, colors: ArrayList<String>, names: ArrayList<String>, ids: ArrayList<String>) {
-        val colorPattern: Pattern = Pattern.compile("<color>(.*?)</color>")
-        val colorMatcher: Matcher = colorPattern.matcher(kmlRaw)
-        while (colorMatcher.find()) {
-            if (!colors.contains(colorMatcher.group(1))) {
-                colors.add(colorMatcher.group(1))
+    override fun onDetailItemClicked(kmlSettingType: KmlSettingType, color: Int) {
+        when (kmlSettingType) {
+            KmlSettingType.UPDATE_BORDER -> {
+                updateBorderLayer(color)
             }
-        }
-
-        val namesPattern: Pattern = Pattern.compile("<name>(.*)</name>")
-        val namesMatcher: Matcher = namesPattern.matcher(kmlRaw)
-        while (namesMatcher.find()) {
-            names.add(namesMatcher.group(1))
-        }
-        names.removeAt(0)
-
-        val idPattern: Pattern = Pattern.compile("<styleUrl>(.*?)</styleUrl>")
-        val idMatcher: Matcher = idPattern.matcher(kmlRaw)
-        while (idMatcher.find()) {
-            if (idMatcher.group(1).contains("nodesc")) {
-                ids.add(idMatcher.group(1))
+            KmlSettingType.UPDATE_FILL -> {
+                updateFillColorLayer(color)
+            }
+            KmlSettingType.TRANSPARENCY -> {
+                updateTransparencyLayer(color)
             }
         }
     }
+
+    private fun updateBorderLayer(color: Int) {
+        currentKmlStyle.strokeColor = color
+        val layer = retrieveKml(currentKmlStyle)
+        layer.addLayerToMap()
+    }
+
+    private fun updateFillColorLayer(color: Int) {
+        currentKmlStyle.fillColor = color
+        val layer = retrieveKml(currentKmlStyle)
+        layer.addLayerToMap()
+    }
+
+    private fun updateTransparencyLayer(alpha: Int) {
+        val alphaValue = (alpha.toFloat()/255)
+        val layer = retrieveKml(currentKmlStyle, alphaValue)
+        layer.addLayerToMap()
+    }
+
 }
+
+data class KmlPreferenceStyle(
+    var resource: Int,
+    var strokeColor: Int,
+    var fillColor: Int,
+    var borderWidth: Float)

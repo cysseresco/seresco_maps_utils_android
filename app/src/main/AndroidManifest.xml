@@ -10,7 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SerescoMapsUtils">
         <activity
-            android:name="seresco.maps.utils.myapplication.MainActivity"
+            android:name=".ClusterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".KmlActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TrackingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,10 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCMKWT_kCq864ycbWxj9HZ_eRQClG2m1q0" />
-
     </application>
 
 </manifest>

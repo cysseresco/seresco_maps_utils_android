@@ -13,43 +13,36 @@ import seresco.maps.utils.lib.utils.Preferences
 import seresco.maps.utils.lib.utils.kml.KMLUtils
 import seresco.maps.utils.lib.utils.marker.MarkerUtils
 
-class TrackingUtils(context: Context, onTrackingCallback: OnTrackingCallback): TrackingBottomSheet.TrackingListener, ColorsBottomSheet.OnColorClicked, Constant {
+class TrackingUtils(context: Context, onTrackingCallback: OnTrackingCallback, supportFragmentManager: FragmentManager, googleMap: GoogleMap): TrackingBottomSheet.TrackingListener, ColorsBottomSheet.OnColorClicked, Constant {
 
-    private val mOnTrackingCallback = onTrackingCallback
-    lateinit var preference: Preferences
     private val mContext = context
+    private val mOnTrackingCallback = onTrackingCallback
+    private val mSupportFragmentManager = supportFragmentManager
+    private val mGoogleMap = googleMap
+
+    lateinit var preference: Preferences
     private val markerUtils = MarkerUtils()
-    private val kmlUtils = KMLUtils()
-    private lateinit var mSupportFragmentManager: FragmentManager
-    private lateinit var mGoogleMap: GoogleMap
+    private val kmlUtils = KMLUtils(context, supportFragmentManager, googleMap)
 
     fun openTrackingPanel(supportFragmentManager: FragmentManager) {
         val trackingSheet = TrackingBottomSheet.newInstance(true, mContext, this)
         trackingSheet.show(supportFragmentManager, DetailBottomSheet.TAG)
     }
 
-    fun getSavedCoordinates() : MutableList<MutableList<Double>>? {
+    fun showSavedCoordinates() {
         preference = Preferences(mContext)
-        return preference.getCoordinates(COORDS_DATA)
-    }
-
-    fun showSavedCoordinates(supportFragmentManager: FragmentManager, googleMap: GoogleMap) {
-        mSupportFragmentManager = supportFragmentManager
-        mGoogleMap = googleMap
-
-        preference = Preferences(mContext)
-        val coordinates = preference.getCoordinates(COORDS_DATA)
-        googleMap.clear()
+        val coordinates = getSavedCoordinates(preference)
+        mGoogleMap.clear()
         coordinates?.let {
             val strokeColor = getStrokeColor(preference)
-            val lays = kmlUtils.retrieveLinesKml(googleMap, it, mContext, strokeColor,1.0f)
+            val lays = kmlUtils.retrieveLinesKml(it, strokeColor,1.0f)
             lays.setOnFeatureClickListener {
                 val trackingSheet = ColorsBottomSheet.newInstance(true, this)
-                trackingSheet.show(supportFragmentManager, DetailBottomSheet.TAG)
+                trackingSheet.show(mSupportFragmentManager, DetailBottomSheet.TAG)
             }
             lays.addLayerToMap()
             val currentPosition = LatLng(it.last().last(),it.last().first())
-            markerUtils.addMarker(googleMap, currentPosition)
+            markerUtils.addMarker(mGoogleMap, currentPosition)
         }
     }
 
@@ -60,7 +53,7 @@ class TrackingUtils(context: Context, onTrackingCallback: OnTrackingCallback): T
     override fun onColorItemClicked(color: Int) {
         preference = Preferences(mContext)
         preference.saveInt(CURRENT_COLOR_DATA, color)
-        showSavedCoordinates(mSupportFragmentManager, mGoogleMap)
+        showSavedCoordinates()
     }
 
     private fun getStrokeColor(preferences: Preferences): Int {
@@ -70,8 +63,12 @@ class TrackingUtils(context: Context, onTrackingCallback: OnTrackingCallback): T
         }
         return strokeColor
     }
+
+    private fun getSavedCoordinates(preferences: Preferences) : MutableList<MutableList<Double>>? {
+        return preferences.getCoordinates(COORDS_DATA)
+    }
 }
 
 interface OnTrackingCallback {
-    fun showTrackCoordinates(coords: MutableList<MutableList<Double>>)
+    fun showTrackCoordinates(coordinates: MutableList<MutableList<Double>>)
 }

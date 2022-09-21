@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/activity_cluster.xml" value="0.15806159420289856" />
+        <entry key="app/src/main/res/layout/activity_kml.xml" value="0.15806159420289856" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14175724637681159" />
+        <entry key="app/src/main/res/layout/activity_tracking.xml" value="0.15806159420289856" />
         <entry key="lib/src/main/res/drawable/bg_recommended.xml" value="0.119" />
         <entry key="lib/src/main/res/drawable/bg_round_border.xml" value="0.113" />
         <entry key="lib/src/main/res/drawable/bg_round_button.xml" value="0.1265" />

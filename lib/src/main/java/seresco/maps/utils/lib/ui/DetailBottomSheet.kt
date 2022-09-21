@@ -11,11 +11,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import seresco.maps.utils.lib.R
 import kotlinx.android.synthetic.main.bottom_sheet_detail.*
 
-class DetailBottomSheet(listener: DetailItemClicked, name: String): BottomSheetDialogFragment() {
+class DetailBottomSheet(listener: DetailItemClicked): BottomSheetDialogFragment() {
 
     private var dismissWithAnimation = false
     private val mListener = listener
-    private val mName = name
+    private var currentKmlSettingStatus: KmlSettingType = KmlSettingType.UPDATE_BORDER
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,75 +30,64 @@ class DetailBottomSheet(listener: DetailItemClicked, name: String): BottomSheetD
     }
 
     private fun setUpViews() {
-        tvName.text = mName
+
     }
 
     private fun setUpListeners() {
         ivEdit.setOnClickListener {
-            rlUpdateName.visibility = View.VISIBLE
-            llColors.visibility = View.GONE
+            rlUpdateName.visibility = View.GONE
+            llColors.visibility = View.VISIBLE
             llTransparency.visibility = View.GONE
-            tvName.isEnabled = true
-            mListener.onDetailItemClicked(1)
+            currentKmlSettingStatus = KmlSettingType.UPDATE_BORDER
         }
         ivPaint.setOnClickListener {
             rlUpdateName.visibility = View.GONE
             llColors.visibility = View.VISIBLE
             llTransparency.visibility = View.GONE
-            tvName.isEnabled = false
-            mListener.onDetailItemClicked(2)
-
+            currentKmlSettingStatus = KmlSettingType.UPDATE_FILL
         }
         ivTransparency.setOnClickListener {
             rlUpdateName.visibility = View.GONE
             llColors.visibility = View.GONE
             llTransparency.visibility = View.VISIBLE
-            tvName.isEnabled = false
-            mListener.onDetailItemClicked(3)
         }
         llRed.setOnClickListener {
-            mListener.onDetailItemClicked(4, "ff0000ff")
+            mListener.onDetailItemClicked(currentKmlSettingStatus, R.color.red)
             dismiss()
         }
         llYellow.setOnClickListener {
-            mListener.onDetailItemClicked(4, "ff00c8ff")
+            mListener.onDetailItemClicked(currentKmlSettingStatus, R.color.yellow)
             dismiss()
         }
         llBlue.setOnClickListener {
-            mListener.onDetailItemClicked(4, "fff3372d")
+            mListener.onDetailItemClicked(currentKmlSettingStatus, R.color.blue)
             dismiss()
         }
         llSkyblue.setOnClickListener {
-            mListener.onDetailItemClicked(4, "fff3ac2d")
+            mListener.onDetailItemClicked(currentKmlSettingStatus, R.color.sky_blue)
             dismiss()
         }
         llGreen.setOnClickListener {
-            mListener.onDetailItemClicked(4, "ff44a648")
+            mListener.onDetailItemClicked(currentKmlSettingStatus, R.color.green)
             dismiss()
         }
         llBrown.setOnClickListener {
-            mListener.onDetailItemClicked(4, "ff606da1")
+            mListener.onDetailItemClicked(currentKmlSettingStatus, R.color.brown)
             dismiss()
         }
         bUpdate.setOnClickListener {
-            mListener.onDetailItemClicked(5, etName.text.toString())
+//            mListener.onDetailItemClicked(5, etName.text.toString())
             dismiss()
         }
         sbTransparency.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-                var decimal = (p1 * 255)/100
-                val hexString = java.lang.Integer.toHexString(decimal)
-                mListener.onDetailItemClicked(6, hexString)
+                val decimal = (p1 * 255)/100
+                mListener.onDetailItemClicked(KmlSettingType.TRANSPARENCY, decimal)
             }
 
-            override fun onStartTrackingTouch(p0: SeekBar?) {
+            override fun onStartTrackingTouch(p0: SeekBar?) { }
 
-            }
-
-            override fun onStopTrackingTouch(p0: SeekBar?) {
-
-            }
-
+            override fun onStopTrackingTouch(p0: SeekBar?) { }
         })
     }
 
@@ -109,16 +98,27 @@ class DetailBottomSheet(listener: DetailItemClicked, name: String): BottomSheetD
     }
 
     companion object {
-        const val TAG = "modalDetailSheet"
+        const val TAG = "detailBottomSheet"
         const val ARG_DISMISS_WITH_ANIMATION = "dismiss_with_animation"
-        fun newInstance(dismissWithAnimation: Boolean, listener: DetailItemClicked, name: String): DetailBottomSheet {
-            val modalSimpleListSheet = DetailBottomSheet(listener, name)
+        fun newInstance(dismissWithAnimation: Boolean, listener: DetailItemClicked): DetailBottomSheet {
+            val modalSimpleListSheet = DetailBottomSheet(listener)
             modalSimpleListSheet.arguments = bundleOf(ARG_DISMISS_WITH_ANIMATION to dismissWithAnimation)
             return modalSimpleListSheet
         }
     }
 
     interface DetailItemClicked {
-        fun onDetailItemClicked(way: Int, color: String = "")
+        fun onDetailItemClicked(kmlSettingType: KmlSettingType, color: Int = 0)
     }
 }
+
+enum class KmlSettingType(val value: Int) {
+    UPDATE_BORDER(1),
+    UPDATE_FILL(2),
+    TRANSPARENCY(3);
+
+    companion object {
+        fun valueOf(value: Int) = KmlSettingType.values().find { it.value == value }
+    }
+}
+
