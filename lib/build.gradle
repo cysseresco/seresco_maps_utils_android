@@ -57,9 +57,9 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
 
-                groupId = 'com.github.diegitsen'
-                artifactId = 'seresco-maps-custom-utils-android'
-                version = '1.5'
+                groupId = 'com.github.cysseresco'
+                artifactId = 'seresco-maps-utils'
+                version = '0.0.1'
             }
         }
     }
