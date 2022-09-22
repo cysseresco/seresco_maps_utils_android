@@ -9,6 +9,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_cluster.*
 import seresco.maps.utils.lib.utils.cluster.ClusterUtils
+import seresco.maps.utils.myapplication.databinding.ActivityClusterBinding
 import seresco.maps.utils.myapplication.utils.BaseActivity
 
 class ClusterActivity : AppCompatActivity(), BaseActivity, OnMapReadyCallback {
@@ -16,9 +17,13 @@ class ClusterActivity : AppCompatActivity(), BaseActivity, OnMapReadyCallback {
     lateinit var googleMap: GoogleMap
     private lateinit var clusterUtils: ClusterUtils
 
+    private val activityClusterBinding by lazy {
+        ActivityClusterBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cluster)
+        setContentView(activityClusterBinding.root)
         setupMap()
     }
 
@@ -39,7 +44,7 @@ class ClusterActivity : AppCompatActivity(), BaseActivity, OnMapReadyCallback {
     override fun setupInteraction() {
         fab_cluster.setOnClickListener {
             val markers = clusterUtils.retrieveMarkers(raw)
-            val clusterManager = clusterUtils.retrieveCluster(googleMap, this, supportFragmentManager, R.drawable.ic_marker, true)
+            val clusterManager = clusterUtils.retrieveCluster(googleMap, this, supportFragmentManager, R.drawable.ic_pin, true)
             clusterManager.addItems(markers)
         }
     }

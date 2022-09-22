@@ -10,6 +10,8 @@ import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_kml.*
 import seresco.maps.utils.lib.utils.kml.KMLUtils
 import seresco.maps.utils.lib.utils.kml.KmlPreferenceStyle
+import seresco.maps.utils.myapplication.databinding.ActivityClusterBinding
+import seresco.maps.utils.myapplication.databinding.ActivityKmlBinding
 import seresco.maps.utils.myapplication.utils.BaseActivity
 
 class KmlActivity : AppCompatActivity(), BaseActivity, OnMapReadyCallback {
@@ -17,9 +19,13 @@ class KmlActivity : AppCompatActivity(), BaseActivity, OnMapReadyCallback {
     lateinit var googleMap: GoogleMap
     private lateinit var kmlUtils: KMLUtils
 
+    private val activityKmlBinding by lazy {
+        ActivityKmlBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_kml)
+        setContentView(activityKmlBinding.root)
         setupMap()
     }
 

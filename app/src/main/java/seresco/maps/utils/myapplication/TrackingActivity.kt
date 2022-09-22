@@ -11,6 +11,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_tracking.*
 import seresco.maps.utils.lib.utils.tracking.OnTrackingCallback
 import seresco.maps.utils.lib.utils.tracking.TrackingUtils
+import seresco.maps.utils.myapplication.databinding.ActivityKmlBinding
+import seresco.maps.utils.myapplication.databinding.ActivityTrackingBinding
 import seresco.maps.utils.myapplication.utils.BaseActivity
 
 class TrackingActivity : AppCompatActivity(), OnMapReadyCallback, OnTrackingCallback, BaseActivity {
@@ -18,9 +20,13 @@ class TrackingActivity : AppCompatActivity(), OnMapReadyCallback, OnTrackingCall
     lateinit var googleMap: GoogleMap
     private lateinit var trackingUtils: TrackingUtils
 
+    private val activityTrackingBinding by lazy {
+        ActivityTrackingBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tracking)
+        setContentView(activityTrackingBinding.root)
         setupMap()
     }
 
