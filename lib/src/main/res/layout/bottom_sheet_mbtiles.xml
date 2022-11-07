@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingEnd="24dp"
+    android:paddingStart="24dp"
+    android:paddingBottom="24dp">
+    <View
+        android:layout_width="38dp"
+        android:layout_height="5dp"
+        android:background="@drawable/bg_sheet_decoration"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccione un fichero .mbtile"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="24dp"/>
+
+    <LinearLayout
+        android:id="@+id/ll_select_mbtile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dashed_border"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:layout_marginBottom="30dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tap para abrir el selector de imágenes"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_mbtile_correct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_green_border"
+        android:padding="16dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="30dp"
+        android:visibility="gone">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_check"
+            android:layout_marginEnd="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Se obutvo el fichero correctamente"
+            android:textSize="15sp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_mbtile_incorrect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_red_border"
+        android:padding="16dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="30dp"
+        android:visibility="gone">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_close"
+            android:layout_marginEnd="10dp"/>
+        <TextView
+            android:id="@+id/tv_mbtile_incorrect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No se pudo obtener el fichero"
+            android:textSize="15sp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/b_mbtile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Aceptar"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/sel_button_color"
+        android:background="@drawable/bg_round_border"
+        android:enabled="false"/>
+
+</LinearLayout>

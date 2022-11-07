@@ -40,6 +40,26 @@
             android:textColor="@color/black"
             android:background="@drawable/bg_round_border"
             app:backgroundTint="@color/purple_500"
+            android:textAllCaps="false"
+            android:layout_marginBottom="30dp"/>
+        <Button
+            android:id="@+id/b_wms_native"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WebMapService Utils"
+            android:textColor="@color/black"
+            android:background="@drawable/bg_round_border"
+            app:backgroundTint="@color/purple_500"
+            android:textAllCaps="false"
+            android:layout_marginBottom="30dp"/>
+        <Button
+            android:id="@+id/b_wms_layers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WebMapService Capas Utils"
+            android:textColor="@color/black"
+            android:background="@drawable/bg_round_border"
+            app:backgroundTint="@color/purple_500"
             android:textAllCaps="false"/>
     </LinearLayout>
 </RelativeLayout>

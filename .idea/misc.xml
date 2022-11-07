@@ -3,20 +3,33 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../layout/custom_preview.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/activity_cluster.xml" value="0.15806159420289856" />
         <entry key="app/src/main/res/layout/activity_kml.xml" value="0.15806159420289856" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14175724637681159" />
         <entry key="app/src/main/res/layout/activity_tracking.xml" value="0.15806159420289856" />
+        <entry key="app/src/main/res/layout/activity_web_map_service_layers.xml" value="0.14175724637681159" />
+        <entry key="app/src/main/res/layout/activity_wmpgoogle_maps.xml" value="0.14175724637681159" />
+        <entry key="lib/src/main/res/drawable/bg_dashed_border.xml" value="0.1465" />
+        <entry key="lib/src/main/res/drawable/bg_green_border.xml" value="0.1465" />
         <entry key="lib/src/main/res/drawable/bg_recommended.xml" value="0.119" />
+        <entry key="lib/src/main/res/drawable/bg_red_border.xml" value="0.1465" />
         <entry key="lib/src/main/res/drawable/bg_round_border.xml" value="0.113" />
         <entry key="lib/src/main/res/drawable/bg_round_button.xml" value="0.1265" />
+        <entry key="lib/src/main/res/drawable/bg_round_button_border.xml" value="0.1465" />
         <entry key="lib/src/main/res/drawable/ic_launcher_background.xml" value="0.1265" />
         <entry key="lib/src/main/res/drawable/progress_animation.xml" value="0.123" />
+        <entry key="lib/src/main/res/drawable/sel_button_color.xml" value="0.1465" />
+        <entry key="lib/src/main/res/layout/adapter_wms_item.xml" value="0.14175724637681159" />
+        <entry key="lib/src/main/res/layout/adapter_wms_layer_item.xml" value="0.25" />
         <entry key="lib/src/main/res/layout/bottom_sheet_colors.xml" value="0.125" />
         <entry key="lib/src/main/res/layout/bottom_sheet_detail.xml" value="0.14175724637681159" />
         <entry key="lib/src/main/res/layout/bottom_sheet_marker_info.xml" value="0.165" />
+        <entry key="lib/src/main/res/layout/bottom_sheet_mbtiles.xml" value="0.25" />
         <entry key="lib/src/main/res/layout/bottom_sheet_settings.xml" value="0.14175724637681159" />
         <entry key="lib/src/main/res/layout/bottom_sheet_tracking.xml" value="0.25" />
+        <entry key="lib/src/main/res/layout/bottom_sheet_wms.xml" value="0.14175724637681159" />
+        <entry key="lib/src/main/res/layout/bottom_sheet_wms_layers.xml" value="0.14764492753623187" />
         <entry key="lib/src/main/res/layout/custom_info_window.xml" value="0.12681159420289856" />
         <entry key="lib/src/main/res/layout/view_marker_info.xml" value="0.12681159420289856" />
       </map>

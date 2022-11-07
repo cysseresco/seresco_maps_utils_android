@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <View
+        android:id="@+id/v_wms_decoration"
+        android:layout_width="38dp"
+        android:layout_height="5dp"
+        android:background="@drawable/bg_sheet_decoration"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_wms_layer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/v_wms_decoration"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:visibility="gone">
+        <EditText
+            android:id="@+id/et_wms_layer_url"
+            android:layout_width="match_parent"
+            android:layout_toLeftOf="@id/b_wms_layer_accept_url"
+            android:layout_marginRight="20dp"
+            android:layout_height="wrap_content"
+            android:hint="Nombre a actualizar"/>
+        <Button
+            android:id="@+id/b_wms_layer_accept_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_round_border"
+            android:text="Aceptar"
+            android:textAllCaps="false"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/black"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_wms_item_layers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:listitem="@layout/adapter_wms_layer_item"
+        tools:itemCount="4"
+        android:layout_above="@id/b_wms_layer_accept"
+        android:layout_below="@id/v_wms_decoration"/>
+
+    <Button
+        android:id="@+id/b_wms_layer_accept"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Aceptar"
+        android:textColor="@color/black"
+        android:background="@drawable/bg_round_border"
+        app:backgroundTint="@color/purple_500"
+        android:textAllCaps="false"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

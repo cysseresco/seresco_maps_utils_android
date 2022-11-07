@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="seresco.maps.utils.myapplication">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SerescoMapsUtils">
+        <activity
+            android:name=".WebMapServiceLayersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WMPGoogleMapsActivity"
+            android:exported="false" />
         <activity
             android:name=".ClusterActivity"
             android:exported="false" />

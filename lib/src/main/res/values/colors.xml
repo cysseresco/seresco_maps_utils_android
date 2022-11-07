@@ -20,5 +20,10 @@
     <color name="blue">#0000ff</color>
     <color name="sky_blue">#00c8ff</color>
     <color name="green">#44a648</color>
+    <color name="border_green">#2E8B57</color>
+    <color name="background_green">#8FBC8F</color>
+    <color name="border_red">#B22222</color>
+    <color name="background_red">#F08080</color>
+
     <color name="brown">#a16d60</color>
 </resources>

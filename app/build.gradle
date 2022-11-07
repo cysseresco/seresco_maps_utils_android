@@ -8,6 +8,7 @@ plugins {
 
 android {
     compileSdk 32
+//    dataBinding.enabled = true
 
     defaultConfig {
         applicationId "diego.maps.utils.myapplication"
@@ -51,6 +52,6 @@ dependencies {
     implementation'com.google.maps.android:android-maps-utils:2.3.0'
     implementation 'com.google.maps.android:maps-utils-ktx:3.4.0'
 
-    implementation 'com.github.cysseresco:seresco_maps_utils_android:0.0.2'
-//    implementation project(':lib')
+   // implementation 'com.github.cysseresco:seresco_maps_utils_android:0.0.1'
+    implementation project(':lib')
 }

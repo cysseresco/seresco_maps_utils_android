@@ -36,5 +36,13 @@ class MainActivity : AppCompatActivity() {
             val clusterIntent = Intent(this, ClusterActivity::class.java)
             startActivity(clusterIntent)
         }
+        b_wms_native.setOnClickListener {
+            val wmsGoogleIntent = Intent(this, WMPGoogleMapsActivity::class.java)
+            startActivity(wmsGoogleIntent)
+        }
+        b_wms_layers.setOnClickListener {
+            val wmsLayersIntent = Intent(this, WebMapServiceLayersActivity::class.java)
+            startActivity(wmsLayersIntent)
+        }
     }
 }

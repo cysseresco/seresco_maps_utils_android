@@ -32,6 +32,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -49,6 +55,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
     implementation 'com.google.code.gson:gson:2.8.6'
+    //implementation 'androidx.databinding:databinding-runtime:7.0.4'
 }
 
 afterEvaluate {
@@ -59,7 +66,7 @@ afterEvaluate {
 
                 groupId = 'com.github.cysseresco'
                 artifactId = 'seresco-maps-utils'
-                version = '0.0.2'
+                version = '0.0.3'
             }
         }
     }

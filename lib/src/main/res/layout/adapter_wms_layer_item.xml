@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp"
+    android:paddingTop="14dp"
+    android:paddingBottom="14dp"
+    android:background="?android:attr/selectableItemBackground">
+    <TextView
+        android:id="@+id/tv_wms_layer_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@id/ib_wms_layer"/>
+    <ImageButton
+        android:id="@+id/ib_wms_layer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_hide"
+        android:background="?android:attr/selectableItemBackgroundBorderless"/>
+</RelativeLayout>

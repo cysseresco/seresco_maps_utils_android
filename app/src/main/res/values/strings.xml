@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SerescoMapsUtils</string>
+    <string name="connection_error">Hubo un error en la conexión</string>
+    <string name="xml_error">Hubo un error en el XML</string>
+    <string name="page_title">Titulo página</string>
+    <string name="updated">Titulo updated</string>
+
 </resources>
