@@ -42,12 +42,25 @@ class WMPGoogleMapsActivity : AppCompatActivity(), BaseActivity, OnMapReadyCallb
 
     private fun initWmsUtils() {
         val items = getWmsItems()
-        wmsUtils = WebMapServiceUtils(supportFragmentManager, items, googleMap, this)
+//        wmsUtils = WebMapServiceUtils(supportFragmentManager, items, googleMap, this)
+        wmsUtils = WebMapServiceUtils(supportFragmentManager, googleMap)
     }
 
     override fun setupInteraction() {
         fab_wms.setOnClickListener {
-            wmsUtils.openWmsPanel()
+            //wmsUtils.openWmsPanel()
+            val urlUsa = "https://ahocevar.com/geoserver/wms" +
+                    "?service=WMS" +
+                    "&version=1.1.1" +
+                    "&request=GetMap" +
+                    "&layers=topp:states" +
+                    "&bbox=%f,%f,%f,%f" +
+                    "&width=256" +
+                    "&height=256" +
+                    "&srs=EPSG:900913" +
+                    "&format=image/png" +
+                    "&transparent=true"
+            wmsUtils.setWmsLayer(urlUsa)
         }
     }
 

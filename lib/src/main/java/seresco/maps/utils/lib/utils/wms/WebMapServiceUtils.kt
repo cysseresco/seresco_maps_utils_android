@@ -11,12 +11,26 @@ import seresco.maps.utils.lib.ui.wms.OfflineWmsBottomSheet
 import seresco.maps.utils.lib.ui.wms.WmsBottomSheet
 import seresco.maps.utils.lib.ui.wms.WmsLayersBottomSheet
 
-class WebMapServiceUtils(supportFragmentManager: FragmentManager, items: List<WMSItem>, googleMap: GoogleMap , onWmsCallback: OnWmsCallback): WmsLayersBottomSheet.OnWmsLayerItemItemCallback {
+class WebMapServiceUtils(): WmsLayersBottomSheet.OnWmsLayerItemItemCallback {
 
-    private val mSupportFragmentManager = supportFragmentManager
-    private val mOnWmsCallback = onWmsCallback
-    private val mItems = items
-    private val mGoogleMap = googleMap
+    private lateinit var mSupportFragmentManager: FragmentManager
+    private lateinit var mOnWmsCallback: OnWmsCallback
+    private lateinit var mItems: List<WMSItem>
+    private lateinit var mGoogleMap: GoogleMap
+
+    constructor(supportFragmentManager: FragmentManager, items: List<WMSItem>, googleMap: GoogleMap , onWmsCallback: OnWmsCallback) :
+            this() {
+        this.mSupportFragmentManager = supportFragmentManager
+        this.mItems = items
+        this.mGoogleMap = googleMap
+        this.mOnWmsCallback = onWmsCallback
+    }
+
+    constructor(supportFragmentManager: FragmentManager, googleMap: GoogleMap) :
+            this() {
+        this.mSupportFragmentManager = supportFragmentManager
+        this.mGoogleMap = googleMap
+    }
 
     fun openWmsPanel() {
         val wmsSheet = WmsBottomSheet.newInstance(true, mOnWmsCallback, mItems)
@@ -44,11 +58,6 @@ class WebMapServiceUtils(supportFragmentManager: FragmentManager, items: List<WM
         val tileOverlay = getWmsSource(wmsUrl)
         mGoogleMap.addTileOverlay(tileOverlay)
     }
-
-//    override fun onWmsLayerItemCallback(wmsItem: WMSItem) {
-//        val tileOverlay = getWmsSource(wmsItem.url)
-//        mGoogleMap.addTileOverlay(tileOverlay)
-//    }
 
     override fun onWmsLayerItemCallback(wmsItems: List<WMSItem>) {
         wmsItems.forEach {
