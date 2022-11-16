@@ -62,11 +62,12 @@ class WmsLayerItemAdapter(private val items: List<WMSItem>, private val listener
                 "&bbox=%f,%f,%f,%f" +
                 "&width=256" +
                 "&height=256" +
+//                "&srs=EPSG:25829" +
                 "&srs=EPSG:900913" +
 //                "&srs=EPSG:23031" +
                 "&format=image/png" +
-                "&transparent=true"
-//                "&styles=default" +
+                "&transparent=true" +
+                "&styles=default"// +
 //                "&version=1.1.1"
 
         return WMSItem(baseUrl, wmsItem.description)

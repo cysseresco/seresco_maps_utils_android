@@ -43,7 +43,7 @@ class WMPGoogleMapsActivity : AppCompatActivity(), BaseActivity, OnMapReadyCallb
     private fun initWmsUtils() {
         val items = getWmsItems()
 //        wmsUtils = WebMapServiceUtils(supportFragmentManager, items, googleMap, this)
-        wmsUtils = WebMapServiceUtils(supportFragmentManager, googleMap)
+        wmsUtils = WebMapServiceUtils(supportFragmentManager, googleMap, this)
     }
 
     override fun setupInteraction() {

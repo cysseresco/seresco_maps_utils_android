@@ -3,9 +3,11 @@ package seresco.maps.utils.lib.utils
 import android.content.Context
 import android.content.SharedPreferences
 import android.location.Location
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import seresco.maps.utils.lib.model.WMSItem
+import seresco.maps.utils.lib.model.WMSLayer
 import java.io.IOException
 import java.lang.NullPointerException
 
@@ -43,6 +45,62 @@ class Preferences (var context: Context): Constant {
 
     fun getInt(key: String): Int{
         return pref!!.getInt(key, 0)
+    }
+
+    fun saveWmsLayers(key: String, value: WMSLayer) {
+        val jsonStringLayers = pref!!.getString(WMS_LAYERS_SELECTED, "")
+        try {
+            val selectedWmsLayers: MutableList<WMSLayer> = Gson().fromJson(jsonStringLayers, object : TypeToken<List<WMSLayer>>() {}.type)
+            if (selectedWmsLayers.contains(value)) {
+                selectedWmsLayers.remove(value)
+            } else {
+                selectedWmsLayers.add(value)
+            }
+            val editor = pref!!.edit()
+            val jsonString = Gson().toJson(selectedWmsLayers)
+            editor.putString(key, jsonString).apply()
+        } catch (e: NullPointerException) {
+            val arrayOfLayers = mutableListOf<WMSLayer>()
+            arrayOfLayers.add(value)
+            val editor = pref!!.edit()
+            val jsonString = Gson().toJson(arrayOfLayers)
+            editor.putString(key, jsonString).apply()
+        }
+    }
+
+    fun getWmsLayers(key: String): List<WMSLayer> {
+        val jsonString = pref!!.getString(key, "")
+        return try {
+            Gson().fromJson(jsonString, object : TypeToken<List<WMSLayer>>() {}.type)
+        } catch (e: NullPointerException) {
+            mutableListOf<WMSLayer>()
+        }
+    }
+
+    fun removeLayer(key: String, value: WMSItem){
+        val jsonStringLayers = pref!!.getString(CURRENT_WMS_LAYERS_SELECTED, "")
+
+        try {
+            var selectedLayers: MutableList<WMSItem> = Gson().fromJson(jsonStringLayers, object : TypeToken<List<WMSItem>>() {}.type)
+//            if (selectedLayers.contains(value)) {
+//                selectedLayers.remove(value)
+//            } else {
+//                selectedLayers.add(value)
+//            }
+            Log.e("hey!!! p", selectedLayers.toString())
+            selectedLayers = selectedLayers.filter { it.description != value.description } as MutableList<WMSItem>
+            Log.e("hey!!! pppp", selectedLayers.toString())
+            val editor = pref!!.edit()
+            val jsonString = Gson().toJson(selectedLayers)
+            editor.putString(key, jsonString).apply()
+        } catch (e: NullPointerException) {
+            val arrayOfLayers = mutableListOf<WMSItem>()
+            arrayOfLayers.add(value)
+            val editor = pref!!.edit()
+            val jsonString = Gson().toJson(arrayOfLayers)
+            editor.putString(key, jsonString).apply()
+        }
+
     }
 
     fun saveLayers(key: String, value: WMSItem){

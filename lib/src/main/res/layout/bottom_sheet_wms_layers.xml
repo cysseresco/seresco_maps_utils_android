@@ -47,11 +47,11 @@
         android:id="@+id/rv_wms_item_layers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:listitem="@layout/adapter_wms_layer_item"
-        tools:itemCount="4"
         android:layout_above="@id/b_wms_layer_accept"
-        android:layout_below="@id/v_wms_decoration"/>
+        android:layout_below="@id/v_wms_decoration"
+        android:orientation="vertical"
+        tools:itemCount="4"
+        tools:listitem="@layout/adapter_wms_layer_item" />
 
     <Button
         android:id="@+id/b_wms_layer_accept"

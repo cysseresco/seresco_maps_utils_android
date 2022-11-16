@@ -4,9 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class WMSItem(
-    var url: String,
-    val description: String,
-    var isSelected: Boolean = false
+data class WMSLayer(
+    val name: String,
+    val items: List<WMSItem>
 ) : Parcelable {
 }

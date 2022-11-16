@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp"
+    android:background="?android:attr/selectableItemBackground">
+    <CheckBox
+        android:id="@+id/cb_layer_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Item nro. 1"/>
+</RelativeLayout>
