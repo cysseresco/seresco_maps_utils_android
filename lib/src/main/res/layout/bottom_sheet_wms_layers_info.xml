@@ -3,8 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <View
+        android:id="@+id/v_wms_info_decoration"
         android:layout_width="38dp"
         android:layout_height="5dp"
         android:background="@drawable/bg_sheet_decoration"
@@ -18,15 +20,14 @@
         android:paddingEnd="10dp"
         android:textSize="16sp"
         android:textColor="@color/black"
-        android:text="Seleccione una capa para obtener su información"
-        android:layout_marginBottom="10dp"/>
+        android:text="Seleccione una capa para obtener su información"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_wms_item"
+        android:id="@+id/rv_wms_item_layers_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:listitem="@layout/adapter_wms_item"
-        tools:itemCount="4"/>
+        tools:itemCount="4"
+        tools:listitem="@layout/adapter_wms_layer_info_item" />
 
 </LinearLayout>

@@ -50,6 +50,12 @@ class WebMapServiceUtils(): WmsLayersBottomSheet.OnWmsLayerItemItemCallback, Wms
         wmsSheet.show(mSupportFragmentManager, DetailBottomSheet.TAG)
     }
 
+    fun openWmsInfoPanel() {
+        val savedLayers = preference.getLayers(CURRENT_WMS_LAYERS_SELECTED)
+        val wmsSheet = WmsBottomSheet.newInstance(true, mOnWmsCallback, savedLayers)
+        wmsSheet.show(mSupportFragmentManager, DetailBottomSheet.TAG)
+    }
+
     fun openWmsPanel(list: MutableList<WMSItem>) {
         val wmsSheet = WmsLayersBottomSheet.newInstance(true, this, list)
         wmsSheet.show(mSupportFragmentManager, WmsLayersBottomSheet.TAG)
@@ -100,15 +106,6 @@ class WebMapServiceUtils(): WmsLayersBottomSheet.OnWmsLayerItemItemCallback, Wms
 //        }
     }
 
-//    override fun onWmsItemSelectedItemClicked(wmsItems: List<WMSItem>) {
-//        Log.e("hey! plsss", wmsItems.toString())
-//        val selectedItems = wmsItems.filter { it.isSelected }
-//        selectedItems.forEach {
-//            val tileOverlay = getWmsSource(it.url)
-//            mGoogleMap.addTileOverlay(tileOverlay)
-//        }
-//    }
-
     override fun onWmsItemSelectedItemClicked(wmsItems: MutableList<WMSItem>) {
         val selectedItems = wmsItems.filter { it.isSelected }
         selectedItems.forEach {
@@ -119,19 +116,9 @@ class WebMapServiceUtils(): WmsLayersBottomSheet.OnWmsLayerItemItemCallback, Wms
     }
 
     override fun onWmsItemDeselectedItemClicked(wmsItem: WMSItem) {
-//        preference.saveLayers(CURRENT_WMS_LAYERS_SELECTED, wmsItem)
         preference.removeLayer(CURRENT_WMS_LAYERS_SELECTED, wmsItem)
         loadSavedLayers()
     }
-
-//    override fun onWmsItemSelectedItemClicked(wmsLayer: WMSLayer) {
-//        val selectedItems = wmsLayer.items.filter { it.isSelected }
-//        selectedItems.forEach {
-//            val tileOverlay = getWmsSource(it.url)
-//            mGoogleMap.addTileOverlay(tileOverlay)
-//            preference.saveWmsLayers(WMS_LAYERS_SELECTED, wmsLayer)
-//        }
-//    }
 
 }
 

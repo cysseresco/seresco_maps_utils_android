@@ -77,6 +77,9 @@ class WebMapServiceLayersActivity : AppCompatActivity(), BaseActivity, OnMapRead
         fab_wms_layers.setOnClickListener {
             loadPage()
         }
+        fab_wms_inform.setOnClickListener {
+            wmsUtils.openWmsInfoPanel()
+        }
     }
 
     override fun moveCamera() {
@@ -89,8 +92,7 @@ class WebMapServiceLayersActivity : AppCompatActivity(), BaseActivity, OnMapRead
     }
 
     override fun showWmsSelected(wmsItem: WMSItem) {
-        wmsUtils.setWmsLayer(wmsItem.url)
-
+        Log.e("hey!!!", wmsItem.description)
     }
 
     private fun loadPage() {

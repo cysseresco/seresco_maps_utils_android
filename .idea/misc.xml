@@ -21,6 +21,7 @@
         <entry key="lib/src/main/res/drawable/progress_animation.xml" value="0.123" />
         <entry key="lib/src/main/res/drawable/sel_button_color.xml" value="0.1465" />
         <entry key="lib/src/main/res/layout/adapter_wms_item.xml" value="0.14175724637681159" />
+        <entry key="lib/src/main/res/layout/adapter_wms_layer_detail.xml" value="0.1272644927536232" />
         <entry key="lib/src/main/res/layout/adapter_wms_layer_info_item.xml" value="0.335" />
         <entry key="lib/src/main/res/layout/adapter_wms_layer_info_item_detail.xml" value="0.25" />
         <entry key="lib/src/main/res/layout/adapter_wms_layer_item.xml" value="0.25" />
@@ -33,6 +34,7 @@
         <entry key="lib/src/main/res/layout/bottom_sheet_wms.xml" value="0.14175724637681159" />
         <entry key="lib/src/main/res/layout/bottom_sheet_wms_layers.xml" value="0.14764492753623187" />
         <entry key="lib/src/main/res/layout/bottom_sheet_wms_layers_detail.xml" value="0.165" />
+        <entry key="lib/src/main/res/layout/bottom_sheet_wms_layers_info.xml" value="0.25" />
         <entry key="lib/src/main/res/layout/custom_info_window.xml" value="0.12681159420289856" />
         <entry key="lib/src/main/res/layout/view_marker_info.xml" value="0.12681159420289856" />
       </map>
