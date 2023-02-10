@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SerescoMapsUtils">
         <activity
+            android:name=".VisorActivity"
+            android:exported="false" />
+        <activity
             android:name=".WebMapServiceLayersActivity"
             android:exported="false" />
         <activity

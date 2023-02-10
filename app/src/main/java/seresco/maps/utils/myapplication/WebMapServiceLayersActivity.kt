@@ -37,7 +37,9 @@ class WebMapServiceLayersActivity : AppCompatActivity(), BaseActivity, OnMapRead
     lateinit var preference: Preferences
 
     companion object {
-        private const val SO_URL =  "https://www.ign.es/wms-inspire/mapa-raster?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities"
+        private const val SO_URL = "https://desageo.seresco.es/geoserver/Explotacion/wms?request=GetCapabilities"//"https://desageo.seresco.es/geoserver/Explotacion/wms?service=WMS&version=1.1.0&request=GetCapabilities"
+//        private const val SO_URL = "https://ideg.xunta.gal//servizos/services/LugaresProtexidos/EspazosNaturaisConservacion/MapServer/WMSServer?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities"
+//        private const val SO_URL =  "https://www.ign.es/wms-inspire/mapa-raster?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities"
         private const val SO_URL_TWO = "https://www.ign.es/wms-inspire/pnoa-ma?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities"
         private const val SO_URL_THREE = "http://www.ign.es/wms/pnoa-historico?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities"
     }

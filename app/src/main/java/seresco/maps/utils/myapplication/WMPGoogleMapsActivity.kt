@@ -1,6 +1,8 @@
 package seresco.maps.utils.myapplication
 
 import android.os.Bundle
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -28,6 +30,8 @@ class WMPGoogleMapsActivity : AppCompatActivity(), BaseActivity, OnMapReadyCallb
         super.onCreate(savedInstanceState)
         setContentView(activityWMSGMapsBinding.root)
         setupMap()
+        val policy = ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
     }
 
     override fun setupMap() {
@@ -48,19 +52,31 @@ class WMPGoogleMapsActivity : AppCompatActivity(), BaseActivity, OnMapReadyCallb
 
     override fun setupInteraction() {
         fab_wms.setOnClickListener {
-            //wmsUtils.openWmsPanel()
-            val urlUsa = "https://ahocevar.com/geoserver/wms" +
+
+            val urlSeresco = "https://desageo.seresco.es/geoserver/Explotacion/wms" +
                     "?service=WMS" +
                     "&version=1.1.1" +
                     "&request=GetMap" +
-                    "&layers=topp:states" +
+                    "&layers=Explotacion:DGC" +
                     "&bbox=%f,%f,%f,%f" +
                     "&width=256" +
                     "&height=256" +
-                    "&srs=EPSG:900913" +
+                    "&srs=EPSG:3857" +
                     "&format=image/png" +
                     "&transparent=true"
-            wmsUtils.setWmsLayer(urlUsa)
+
+            val urlIgn = "https://www.ign.es/wms-inspire/pnoa-ma" +
+                    "?service=WMS" +
+                    "&version=1.1.1" +
+                    "&request=GetMap" +
+                    "&layers=OI.OrthoimageCoverage" +
+                    "&bbox=%f,%f,%f,%f" +
+                    "&width=256" +
+                    "&height=256" +
+                    "&srs=EPSG:3857" +
+                    "&format=image/png" +
+                    "&transparent=true"
+            wmsUtils.setWmsLayer(urlIgn)
         }
     }
 

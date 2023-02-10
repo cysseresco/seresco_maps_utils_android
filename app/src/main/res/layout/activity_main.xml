@@ -60,6 +60,16 @@
             android:textColor="@color/black"
             android:background="@drawable/bg_round_border"
             app:backgroundTint="@color/purple_500"
+            android:textAllCaps="false"
+            android:layout_marginBottom="30dp"/>
+        <Button
+            android:id="@+id/b_visor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Visor Xeaga"
+            android:textColor="@color/black"
+            android:background="@drawable/bg_round_border"
+            app:backgroundTint="@color/purple_500"
             android:textAllCaps="false"/>
     </LinearLayout>
 </RelativeLayout>

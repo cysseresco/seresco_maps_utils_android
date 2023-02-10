@@ -44,5 +44,9 @@ class MainActivity : AppCompatActivity() {
             val wmsLayersIntent = Intent(this, WebMapServiceLayersActivity::class.java)
             startActivity(wmsLayersIntent)
         }
+        b_visor.setOnClickListener {
+            val visorIntent = Intent(this, VisorActivity::class.java)
+            startActivity(visorIntent)
+        }
     }
 }

@@ -30,11 +30,7 @@ class WmsLayerItemInfoDetailAdapter(private val wmsItems: MutableList<WMSItem>, 
         val item = wmsItems[position]
         val preferences = Preferences(holder.checkBox.context)
         val selectedWmsItems = preferences.getLayers(CURRENT_WMS_LAYERS_SELECTED)
-//        val xd = selectedWmsItems.map { it.description == item.description }.any { it }
         if (selectedWmsItems.map { it.description == item.description }.any { it }) {
-            Log.e("hey! selsss", selectedWmsItems.toString())
-            Log.e("hey! itemmm", item.toString())
-            Log.e("hey! match", selectedWmsItems.map { it.description == item.description }.toString())
             item.isSelected = true
         }
         holder.checkBox.text = item.description
@@ -51,15 +47,16 @@ class WmsLayerItemInfoDetailAdapter(private val wmsItems: MutableList<WMSItem>, 
     }
 
     private fun getWmsUrl(wmsItem: WMSItem): String {
-        return "${wmsItem.url.split("GetCapabilities").toTypedArray().first()}GetMap" +
-                "&layers=${wmsItem.description}" +
-                "&bbox=%f,%f,%f,%f" +
-                "&width=256" +
-                "&height=256" +
-                "&srs=EPSG:3857" +
-                "&format=image/png" +
-                "&transparent=true" +
-                "&styles=default"
+        return wmsItem.url
+//        return "${wmsItem.url.split("GetCapabilities").toTypedArray().first()}GetMap" +
+//                "&layers=${wmsItem.description}" +
+//                "&bbox=%f,%f,%f,%f" +
+//                "&width=256" +
+//                "&height=256" +
+//                "&srs=EPSG:3857" +
+//                "&format=image/png" +
+//                "&transparent=true" //+
+               // "&styles=default"
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

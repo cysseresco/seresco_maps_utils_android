@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/layout/activity_kml.xml" value="0.15806159420289856" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_tracking.xml" value="0.15806159420289856" />
+        <entry key="app/src/main/res/layout/activity_visor.xml" value="0.16893115942028986" />
         <entry key="app/src/main/res/layout/activity_web_map_service_layers.xml" value="0.14175724637681159" />
         <entry key="app/src/main/res/layout/activity_wmpgoogle_maps.xml" value="0.14175724637681159" />
         <entry key="lib/src/main/res/drawable/bg_dashed_border.xml" value="0.1465" />
@@ -34,7 +35,7 @@
         <entry key="lib/src/main/res/layout/bottom_sheet_wms.xml" value="0.14175724637681159" />
         <entry key="lib/src/main/res/layout/bottom_sheet_wms_layers.xml" value="0.14764492753623187" />
         <entry key="lib/src/main/res/layout/bottom_sheet_wms_layers_detail.xml" value="0.165" />
-        <entry key="lib/src/main/res/layout/bottom_sheet_wms_layers_info.xml" value="0.25" />
+        <entry key="lib/src/main/res/layout/bottom_sheet_wms_layers_info.xml" value="0.13894042968750006" />
         <entry key="lib/src/main/res/layout/custom_info_window.xml" value="0.12681159420289856" />
         <entry key="lib/src/main/res/layout/view_marker_info.xml" value="0.12681159420289856" />
       </map>
