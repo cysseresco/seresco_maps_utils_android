@@ -85,19 +85,20 @@ class WebMapServiceUtils(): WmsLayersBottomSheet.OnWmsLayerItemItemCallback, Wms
         offlineWmsSheet.show(mSupportFragmentManager, DetailBottomSheet.TAG)
     }
 
-
     private fun getWmsSource(wmsUrl: String): TileOverlayOptions {
         val wmsTileProvider: TileProvider = TileProviderFactory.getOsgeoWmsTileProvider(wmsUrl)
         return TileOverlayOptions().tileProvider(wmsTileProvider)
     }
 
-    fun setWmsLayer(wmsUrl: String) {
+    fun setClearedWmsLayer(wmsUrl: String) {
         mGoogleMap.clear()
         val tileOverlay = getWmsSource(wmsUrl)
         val mProvider = tileOverlay.tileProvider
-        mProvider?.let {
-            clickLis(it)
-        }
+        mGoogleMap.addTileOverlay(tileOverlay)
+    }
+
+    fun setWmsLayer(wmsUrl: String) {
+        val tileOverlay = getWmsSource(wmsUrl)
         mGoogleMap.addTileOverlay(tileOverlay)
     }
 

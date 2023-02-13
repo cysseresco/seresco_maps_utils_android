@@ -3,6 +3,7 @@ package seresco.maps.utils.myapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
+import android.util.Log
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -28,7 +29,7 @@ class VisorActivity : AppCompatActivity(), BaseActivity, OnMapReadyCallback, OnW
         ActivityVisorBinding.inflate(layoutInflater)
     }
 
-    fun getIgnUrl(): String {
+    private fun getIgnUrl(): String {
          return "https://www.ign.es/wms-inspire/pnoa-ma" +
                     "?service=WMS" +
                     "&version=1.1.1" +
@@ -60,8 +61,6 @@ class VisorActivity : AppCompatActivity(), BaseActivity, OnMapReadyCallback, OnW
         super.onCreate(savedInstanceState)
         setContentView(activityVisorBinding.root)
         setupMap()
-        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
-        StrictMode.setThreadPolicy(policy)
     }
 
     override fun setupMap() {
@@ -120,6 +119,8 @@ class VisorActivity : AppCompatActivity(), BaseActivity, OnMapReadyCallback, OnW
                     "&format=image/png" +
                     "&transparent=true"
 
+            val urlSeresco4 = "SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=Explotacion%3ADGC&STYLES=Explotacion%3Adgc&CQL_FILTER=id_explotacion%20%3D%201999%20and%20(fecha_fin%20is%20null%20or%20%272023-02-09%27%20%3C%3D%20fecha_fin)%20and%20(%20fecha_inicio%20%3C%3D%20%272023-02-09%27)%20and%20(fecha_fin%20is%20null%20or%20%2709%2F02%2F2023%27%20%3C%3D%20fecha_fin)%20and%20(%20fecha_inicio%20%3C%3D%20%2709%2F02%2F2023%27)&WIDTH=256&HEIGHT=256&CRS=EPSG%3A25829&BBOX=%f,%f,%f,%f"
+
             val wmsItemsDGC = WMSItem(urlSeresco1, "DGC", false)
             val wmsItemsRecinto = WMSItem(urlSeresco2, "Recinto", false)
             val wmsItemsCultivos = WMSItem(urlSeresco3, "Cultivos", false)
@@ -127,7 +128,7 @@ class VisorActivity : AppCompatActivity(), BaseActivity, OnMapReadyCallback, OnW
             items.add(wmsItemsDGC)
             items.add(wmsItemsRecinto)
             items.add(wmsItemsCultivos)
-            val wmsLayer = WMSLayer("Seresco", items)
+            val wmsLayer = WMSLayer("Elementos de mi explotación", items)
             val wmsLayerList = arrayListOf<WMSLayer>()
             wmsLayerList.add(wmsLayer)
             wmsUtils.openWmsLayersPanel(wmsLayerList)
@@ -141,6 +142,20 @@ class VisorActivity : AppCompatActivity(), BaseActivity, OnMapReadyCallback, OnW
             }
             isTopographyStyleSelected = !isTopographyStyleSelected
         }
+
+        fab_plus.setOnClickListener {
+            val zoom = googleMap.cameraPosition.zoom + 1
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(zoom))
+        }
+
+        fab_world.setOnClickListener {
+            moveCamera()
+        }
+
+        fab_minus.setOnClickListener {
+            val zoom = googleMap.cameraPosition.zoom - 1
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(zoom))
+        }
     }
 
     override fun showWmsSelected(wmsItem: WMSItem) {
@@ -148,7 +163,7 @@ class VisorActivity : AppCompatActivity(), BaseActivity, OnMapReadyCallback, OnW
     }
 
     override fun moveCamera() {
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(42.906051557807295,-8.566638641059399), 13f))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(42.97387312773433,-8.884112946689127), 18f))
     }
 
     override fun onMapReady(p0: GoogleMap) {

@@ -15,11 +15,32 @@
         android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true"/>
 
+    <TextView
+        android:id="@+id/tv_layers_availables"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:text="Capas disponibles"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_line"
+        android:layout_width="match_parent"
+        android:layout_below="@id/tv_layers_availables"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_wms_item_layers_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/v_wms_detail_decoration"
+        android:layout_below="@id/ll_line"
         android:orientation="vertical"
         tools:itemCount="4"
         tools:listitem="@layout/adapter_wms_layer_info_item" />
