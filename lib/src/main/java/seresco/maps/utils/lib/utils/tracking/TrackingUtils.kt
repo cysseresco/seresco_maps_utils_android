@@ -37,6 +37,9 @@ class TrackingUtils(context: Context, onTrackingCallback: OnTrackingCallback, su
         val coordinates = getSavedCoordinates(preference)
        // mGoogleMap.clear()
         coordinates?.let {
+            if (coordinates.isEmpty()) {
+                return
+            }
             val strokeColor = getStrokeColor(preference)
             val lays = kmlUtils.retrieveLinesKml(it, strokeColor,1.0f)
             lays.setOnFeatureClickListener {
