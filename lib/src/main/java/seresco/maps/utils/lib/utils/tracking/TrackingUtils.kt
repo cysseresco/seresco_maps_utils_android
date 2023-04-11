@@ -1,6 +1,8 @@
 package seresco.maps.utils.lib.utils.tracking
 
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
@@ -26,17 +28,19 @@ class TrackingUtils(context: Context, onTrackingCallback: OnTrackingCallback, su
 
     fun openTrackingPanel(supportFragmentManager: FragmentManager) {
         val trackingSheet = TrackingBottomSheet.newInstance(true, mContext, this)
+        trackingSheet.isCancelable = false
         trackingSheet.show(supportFragmentManager, DetailBottomSheet.TAG)
     }
 
     fun showSavedCoordinates() {
         preference = Preferences(mContext)
         val coordinates = getSavedCoordinates(preference)
-        mGoogleMap.clear()
+       // mGoogleMap.clear()
         coordinates?.let {
             val strokeColor = getStrokeColor(preference)
             val lays = kmlUtils.retrieveLinesKml(it, strokeColor,1.0f)
             lays.setOnFeatureClickListener {
+                lays.removeLayerFromMap()
                 val trackingSheet = ColorsBottomSheet.newInstance(true, this)
                 trackingSheet.show(mSupportFragmentManager, DetailBottomSheet.TAG)
             }
@@ -44,6 +48,30 @@ class TrackingUtils(context: Context, onTrackingCallback: OnTrackingCallback, su
             val currentPosition = LatLng(it.last().last(),it.last().first())
             markerUtils.addMarker(mGoogleMap, currentPosition)
         }
+    }
+
+    fun cleanSavedCoordinates() {
+        preference = Preferences(mContext)
+        val coordinates = getSavedCoordinates(preference)
+        Log.e("hey!", "clean")
+        coordinates?.let {
+            val strokeColor = getStrokeColor(preference)
+            val lays = kmlUtils.retrieveLinesKml(it, strokeColor,1.0f)
+            lays.addLayerToMap()
+            lays.removeLayerFromMap()
+        }
+    }
+
+    override fun cleanTrackingRoute() {
+       /* preference = Preferences(mContext)
+        val coordinates = getSavedCoordinates(preference)
+        Log.e("hey!", "clean")
+        coordinates?.let {
+            val strokeColor = getStrokeColor(preference)
+            val lays = kmlUtils.retrieveLinesKml(it, strokeColor,1.0f)
+            lays.removeLayerFromMap()
+        }*/
+        mOnTrackingCallback.removeTrackedRoute()
     }
 
     override fun getCoordinates(coords: MutableList<MutableList<Double>>) {
@@ -71,4 +99,5 @@ class TrackingUtils(context: Context, onTrackingCallback: OnTrackingCallback, su
 
 interface OnTrackingCallback {
     fun showTrackCoordinates(coordinates: MutableList<MutableList<Double>>)
+    fun removeTrackedRoute()
 }

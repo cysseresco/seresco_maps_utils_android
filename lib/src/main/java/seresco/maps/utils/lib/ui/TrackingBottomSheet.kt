@@ -105,11 +105,12 @@ class TrackingBottomSheet(context: Context, trackingListener: TrackingListener):
         }
 
         tvClean.setOnClickListener {
+            mTrackingListener.cleanTrackingRoute()
             coordinatesObtained.clear()
             preference.saveCoordinates(COORDS_DATA, null)
             setCoordinatesInfo()
             stopAutomaticTracking()
-            mTrackingListener.getCoordinates(mutableListOf())
+           // mTrackingListener.getCoordinates(mutableListOf())
         }
 
         b5Secs.setOnClickListener {
@@ -284,6 +285,7 @@ class TrackingBottomSheet(context: Context, trackingListener: TrackingListener):
 
     interface TrackingListener {
         fun getCoordinates(coords: MutableList<MutableList<Double>>)
+        fun cleanTrackingRoute()
     }
 
     /////---------new method--------////

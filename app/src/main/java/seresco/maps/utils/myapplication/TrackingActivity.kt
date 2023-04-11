@@ -63,4 +63,8 @@ class TrackingActivity : AppCompatActivity(), OnMapReadyCallback, OnTrackingCall
     override fun showTrackCoordinates(coordinates: MutableList<MutableList<Double>>) {
         trackingUtils.showSavedCoordinates()
     }
+
+    override fun removeTrackedRoute() {
+        trackingUtils.cleanSavedCoordinates()
+    }
 }
