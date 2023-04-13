@@ -48,15 +48,12 @@ class TrackingUtils(context: Context, onTrackingCallback: OnTrackingCallback, su
                 trackingSheet.show(mSupportFragmentManager, DetailBottomSheet.TAG)
             }
             lays.addLayerToMap()
-            val currentPosition = LatLng(it.last().last(),it.last().first())
-            markerUtils.addMarker(mGoogleMap, currentPosition)
         }
     }
 
     fun cleanSavedCoordinates() {
         preference = Preferences(mContext)
         val coordinates = getSavedCoordinates(preference)
-        Log.e("hey!", "clean")
         coordinates?.let {
             val strokeColor = getStrokeColor(preference)
             val lays = kmlUtils.retrieveLinesKml(it, strokeColor,1.0f)
